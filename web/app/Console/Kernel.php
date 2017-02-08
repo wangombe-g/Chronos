@@ -4,6 +4,10 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Support\Facades\Storage;
+
+use App\CellarWine;
+use App\Cellar1Wine;
 
 class Kernel extends ConsoleKernel
 {
@@ -12,6 +16,7 @@ class Kernel extends ConsoleKernel
      *
      * @var array
      */
+
     protected $commands = [
         //
     ];
@@ -24,8 +29,14 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        $schedule->call(function(){
+            $db1 = CellarWine::all();
+            $db2 = Cellar1Wine::all();
+
+            Storage::put(date('d-m-Y--H_i_s'), $db1->toArray()[0]);
+            Storage::put(date('d-m-Y--H_i_s-1'), $db2->toArray()[2]);
+        })->everyFiveMinutes();//->dailyAt('00:00');
+
     }
 
     /**
