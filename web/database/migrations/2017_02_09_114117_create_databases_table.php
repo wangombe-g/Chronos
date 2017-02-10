@@ -15,9 +15,9 @@ class CreateDatabasesTable extends Migration
         Schema::create('databases', function (Blueprint $table) {
             $table->increments('id');
             $table->uuid('uuid')->unique();
+            $table->uuid('client_uuid')->unique();
             $table->string('db_name');
-            $table->string('db_username');
-            $table->string('db_password');
+            $table->dateTime('last_sync_date');
             $table->softDeletes();
             $table->timestampsTz();
         });

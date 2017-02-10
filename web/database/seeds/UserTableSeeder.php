@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-use app\UUID;
+use App\UUID;
 
 class UserTableSeeder extends Seeder
 {
@@ -15,9 +15,9 @@ class UserTableSeeder extends Seeder
     {
         DB::table('users')->insert([
             [
-            	'uuid' => UUID::v4();
-	            'username' => 'admin';
-	            'password' => bcrypt('admin12345');
+            	'uuid' => UUID::v4(),
+	            'username' => 'admin',
+	            'password' => bcrypt('admin12345'),
             ],
         ]);
     }

@@ -11,6 +11,8 @@ use App\UUID;
 
 use Illuminate\Support\Facades\DB;
 
+use App\Database;
+
 class Kernel extends ConsoleKernel
 {
     /**
@@ -33,33 +35,27 @@ class Kernel extends ConsoleKernel
     {
         $schedule->call(function() {
 
-            $lattana = array();
-            $lattana['database'] = "lattana";
-            $lattana['client_id'] = UUID::v4();
-            
-            $lattana_one = array();
-            $lattana_one['database'] = "lattana_one";
-            $lattana_one['client_id'] = UUID::v4();     
+            $dbs = Database::all()->distinct();
 
-            $all_tables_lattana = array(); 
-            $all_tables_lattana_one = array(); 
-            
-            $tables = Queries::AllTables();
-            foreach($tables as $key => $value)
-            {
-                $lattana_data = DB::connection("lattana")->select($value);
-                $all_tables_lattana[$key] = $lattana_data;
+            foreach ($dbs as $database) {              
+                $data = array();
+                $data['database'] = $database->db_name;
+                $data['database_uuid'] = $database->uuid; 
+                $data['last_sync_date'] = $database->last_sync_date;
+                $data['sync_date'] = date('d-m-Y H:i:s');
 
+                $all_tables_data = array();
+                $tables = Queries::AllTables();
 
-                $lattana_one_data = DB::connection("lattana_one")->select($value);
-                $all_tables_lattana_one[$key] = $lattana_one_data;
-                
+                foreach($tables as $key => $value)
+                {
+                    $data = DB::connection($database->db_name)->select($value);
+                    $all_tables_data[$key] = $data;
+
+                }
+                $data['tables'] = $all_tables_data;
+                Storage::put(date('d-m-Y-H_i') . '.json', json_encode($data));
             }
-            $lattana['tables'] = $all_tables_lattana;
-            $lattana_one['tables'] = $all_tables_lattana_one;
-            
-            Storage::put(date('d-m-Y-H_i') . '-lattana.json', json_encode($lattana));
-            Storage::put(date('d-m-Y-H_i') . '-lattana_one.json', json_encode($lattana_one));
             
         })->everyMinute();//->dailyAt('01:00');
 
