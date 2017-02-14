@@ -45,6 +45,7 @@ class DatabaseSync {
 
         }
         $data['tables'] = $all_tables_data;
+
         Storage::put(date('d-m-Y-H_i') . '.json', json_encode($data));
 
         $database->last_sync_date = date('Y-m-d H:i:s');
