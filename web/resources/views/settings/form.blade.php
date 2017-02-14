@@ -33,7 +33,7 @@
 
     <label for="_email">Days to Sync</label>
     <div class="form-group">
-        <input type="number"  name="_days" class="form-control" value="{{ $user ? $user->days : old('_days') }}">
+        <input type="number" min="1" name="_days" class="form-control" value="{{ $user ? $user->days : old('_days') }}">
         @if ($errors->has('_days'))
             <span class="help-block">
                 <strong>{{ $errors->first('_days') }}</strong>
