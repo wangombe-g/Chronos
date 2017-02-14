@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
     <!-- Scripts -->
     <script>
@@ -78,12 +79,19 @@
                 </div>
             </div>
         </nav>
-
+    <div class="container" hidden id="message_container">
+        <div class="col-md-8 col-md-offset-2 alert alert-success" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <p id="message"></p>
+        </div>
+    </div>
         @yield('content')
     </div>
 
     <!-- Scripts -->
     <script src="/js/app.js"></script>
-{{--     <script src="/js/cronos.app.js"></script> --}}
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src="/js/cronos.app.js"></script>
+    
 </body>
 </html>

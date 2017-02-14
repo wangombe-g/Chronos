@@ -18,8 +18,9 @@ class CreateUsersTable extends Migration
             $table->uuid('uuid')->unique();
             $table->string('username')->unique();
             $table->string('email')->nullable();
+            $table->integer('days')->default(1);
             $table->string('password');
-            $table->string('endpoint');
+            $table->string('endpoint')->nullable();
             $table->softDeletes();
             $table->rememberToken();
             $table->timestampsTz();

@@ -17,7 +17,7 @@ class UserTableSeeder extends Seeder
             [
             	'uuid' => UUID::v4(),
 	            'username' => 'admin',
-	            'password' => bcrypt('admin12345'),
+                'password' => bcrypt('admin123'),
             ],
         ]);
     }

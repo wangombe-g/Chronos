@@ -1,5 +1,4 @@
 <?php
-
 return [
 
     /*
@@ -53,14 +52,25 @@ return [
             'engine' => null,
         ],
         /*Subsequent Databases
-        add as many dbs as you want through the .env file and updating the batabases here as well
         */
-        //
-        env('DB_DATABASE_1', 'secondary_db_1_name') => [ 
+        env('DB_DATABASE_LATTANA', 'forge') => [
             'driver' => 'mysql',
             'host' => env('DB_HOST', '127.0.0.1'),
             'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE_1', 'forge'),
+            'database' => env('DB_DATABASE_LATTANA', 'forge'),
+            'username' => env('DB_USERNAME', 'forge'),
+            'password' => env('DB_PASSWORD', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'strict' => true,
+            'engine' => null,
+        ],
+        env('DB_DATABASE_LATTANA_ONE', 'forge') => [
+            'driver' => 'mysql',
+            'host' => env('DB_HOST', '127.0.0.1'),
+            'port' => env('DB_PORT', '3306'),
+            'database' => env('DB_DATABASE_LATTANA_ONE', 'forge'),
             'username' => env('DB_USERNAME', 'forge'),
             'password' => env('DB_PASSWORD', ''),
             'charset' => 'utf8mb4',
@@ -70,19 +80,7 @@ return [
             'engine' => null,
         ],
 
-        env('DB_DATABASE_2', 'secondary_db_2_name') => [
-            'driver' => 'mysql',
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE_2', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
-            'charset' => 'utf8mb4',
-            'collation' => 'utf8mb4_unicode_ci',
-            'prefix' => '',
-            'strict' => true,
-            'engine' => null,
-        ],
+
 
         'pgsql' => [
             'driver' => 'pgsql',

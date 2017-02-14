@@ -9,20 +9,25 @@
                 <div class="panel-body">
                 <!-- navigation tabs -->                
                     <div class="row">
-                        <div class="col-md-9">
+                        <div class="col-md-10">
                             @include('layouts.dashboard.tabs')
                         </div>
-                        <div class="col-md-3">
-                           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#new_database">New Database</button>
+                        <div class="col-md-2">
+                        <a title="Sync all" class="btn btn-primary" href="{{ url('/database/sync/all') }}"
+                                            onclick="event.preventDefault();
+                                                     document.getElementById('sync_all_form').submit();">
+                            <i class="fa fa-refresh" aria-hidden="true"></i>
+                        </a>
                         </div>
                     </div>
                 </div>
-                <div class="panel-body"> 
-                    @include('database.databases')
+                @include('database.databases')
                 </div>
             </div>
         </div>
     </div>
 </div>
-@include('database.form')
+ <form id="sync_all_form" action="{{ url('/database/sync/all') }}" method="POST" style="display: none;">
+    {{ csrf_field() }}
+</form>
 @endsection

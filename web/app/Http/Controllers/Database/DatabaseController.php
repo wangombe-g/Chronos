@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Database;
 use App\Client;
 use App\UUID;
+use App\DatabaseSync;
 
 class DatabaseController extends Controller
 {
@@ -30,43 +31,43 @@ class DatabaseController extends Controller
     public function index()
     {   
         $databases = Database::paginate(10);
+        
         return view('database/index', [
             'databases' => $databases,
-            'clients' => Client::all(),
         ]);
+    }
+
+    public function newDb()
+    {     
+        return view('database/form');
     }
 
     public function publish(Request $request)
     {
     	// validate input
         $this->validate($request, [
-            '_client' => 'required',
             '_name' => 'required',
         ]);
 
-       	$db = Database();
+       	$db = new Database();
         $db->uuid = UUID::v4();
        	$db->db_name = $request['_name'];
-       	$db->clinent_uuid = $request['_client'];
-		$db->save();
+		$db->save();        
 
-		return response()->json([
-		    'message' => 'Database info has been updated'
-		]);
+        return redirect()->action('Database\DatabaseController@index');
+
     }
 
     public function delete($database)
     {
         $database->forceDelete();
 
-        return response()->json([
-            'message' => 'Database connection info has been permanently deleted'
-        ]);
+        return redirect()->action('Database\DatabaseController@index');
     }
-    public function triggerSync(Request $request)
+
+    public function syncAll()
     {
-        return response()->json([
-            'message' => 'sync done!'
-        ]);
+        DatabaseSync::syncAll();
+        return redirect()->action('Database\DatabaseController@index');
     }
 }
