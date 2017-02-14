@@ -53,7 +53,7 @@ return [
         ],
         /*Subsequent Databases
         */
-        env('DB_DATABASE_LATTANA', 'forge') => [
+        env('DB_DATABASE_ONE', 'forge') => [
             'driver' => 'mysql',
             'host' => env('DB_HOST', '127.0.0.1'),
             'port' => env('DB_PORT', '3306'),
@@ -66,7 +66,7 @@ return [
             'strict' => true,
             'engine' => null,
         ],
-        env('DB_DATABASE_LATTANA_ONE', 'forge') => [
+        env('DB_DATABASE_TWO', 'forge') => [
             'driver' => 'mysql',
             'host' => env('DB_HOST', '127.0.0.1'),
             'port' => env('DB_PORT', '3306'),
