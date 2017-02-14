@@ -21,6 +21,7 @@ DB_PASSDORD=your_database_password
 and save the file as `.env`.
 7. Add the subsequent databases you will be connecting to in the .env file as well. e.g
  ```
+ 
 DB_DATABASE_ONE=your_database_name_one
 DB_DATABASE_TWO=your_database_name_two
 ```
