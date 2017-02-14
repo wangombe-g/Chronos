@@ -19,16 +19,45 @@ DB_USERNAME=your_database_username
 DB_PASSDORD=your_database_password
 ```
 and save the file as `.env`.
-7. Add the subsequent databases you will be connecting to in the .env file as well. e.g
+6. Add the subsequent databases you will be connecting to in the .env file as well. e.g
  ```
 DB_DATABASE_ONE=your_database_name_one
 DB_DATABASE_TWO=your_database_name_two
 ```
+7. Add the corresponding connections to you `web/config/database.php` file like so: 
+ ```
+
+ env('DB_DATABASE_ONE', 'forge') => [
+            'driver' => 'mysql',
+            'host' => env('DB_HOST', '127.0.0.1'),
+            'port' => env('DB_PORT', '3306'),
+            'database' => env('DB_DATABASE_ONE', 'forge'),
+            'username' => env('DB_USERNAME', 'forge'),
+            'password' => env('DB_PASSWORD', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'strict' => true,
+            'engine' => null,
+        ],
+ env('DB_DATABASE_TWO', 'forge') => [
+            'driver' => 'mysql',
+            'host' => env('DB_HOST', '127.0.0.1'),
+            'port' => env('DB_PORT', '3306'),
+            'database' => env('DB_DATABASE_TWO', 'forge'),
+            'username' => env('DB_USERNAME', 'forge'),
+            'password' => env('DB_PASSWORD', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'strict' => true,
+            'engine' => null,
+        ],
+```
 This is easier than connecting to the dbs at runntime.
-6. While still in your terminal at `cronos/web`, `php artisan migrate` and press enter. This will setup the database tables to be used for this application.
-7. Generate a key for your application by typing `php artisan key:generate`
-8. You're almost done! Just head to your browser and navigate to the project's root directory
-9. Have fun exploring!
+8. While still in your terminal at `cronos/web`, `php artisan migrate` and press enter. This will setup the database tables to be used for this application.
+9. Generate a key for your application by typing `php artisan key:generate`
+10. Done!
 
 #Updating the project
 
