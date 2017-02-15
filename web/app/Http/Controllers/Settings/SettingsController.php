@@ -34,7 +34,7 @@ class SettingsController extends Controller
         // validate input
         $this->validate($request, [
             '_current_password' => 'required',
-            '_days' => 'numeric',
+            '_hours' => 'numeric',
         ]);
 
         $user = User::where('uuid', Auth::user()->uuid)->firstOrFail();
@@ -42,12 +42,12 @@ class SettingsController extends Controller
         $_username = $request['_username'];
         $email = $request['_email'];
         $endpoint = $request['_endpoint'];
-        $days = $request['_days'];
+        $hours = $request['_hours'];
 
         $user->username = $_username;
         $user->email = $email;
         $user->endpoint = $endpoint;
-        $user->days = $days;
+        $user->hours = $hours;
 
         $user->save();
 
