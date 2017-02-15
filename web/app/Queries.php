@@ -22,7 +22,8 @@ class Queries {
 			"product_image" => "SELECT * FROM product_image WHERE last_modified_date  > (NOW() - INTERVAL $time DAY)",
 			"retailer_branches" => "SELECT * FROM retailer_branches WHERE last_modified_date  > (NOW() - INTERVAL $time DAY)",
 			"retailer_info" => "SELECT * FROM retailer_info WHERE last_modified  > (NOW() - INTERVAL $time DAY)",
-			"subscriber_info" => "SELECT * FROM subscriber_info WHERE last_modified  > (NOW() - INTERVAL $time DAY)"
+			"subscriber_info" => "SELECT * FROM subscriber_info WHERE last_modified  > (NOW() - INTERVAL $time DAY)",
+			"user_account" => "SELECT * FROM user_account WHERE last_modified  > (NOW() - INTERVAL $time DAY)",
 		);
 	}
 
@@ -43,7 +44,8 @@ class Queries {
 			"product_image" => "SELECT * FROM product_image",
 			"retailer_branches" => "SELECT * FROM retailer_branches",
 			"retailer_info" => "SELECT * FROM retailer_info",
-			"subscriber_info" => "SELECT * FROM subscriber_info"
+			"subscriber_info" => "SELECT * FROM subscriber_info",
+			"user_account" => "SELECT * FROM user_account",
 		);
 	}
 }
