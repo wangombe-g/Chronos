@@ -10,6 +10,8 @@ use App\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\QueryException;
 
 class DatabaseSync {
 
@@ -19,7 +21,8 @@ class DatabaseSync {
         $tables_time = Queries::AllTablesWithTimeConstraint(User::find(1)->time);
         $tables = Queries::AllTables();
 
-        foreach ($dbs as $database) {
+        foreach ($dbs as $database) 
+        {
 
             if( $database->last_sync_date == null)
                 DatabaseSync::doJob($tables, $database);
@@ -40,10 +43,26 @@ class DatabaseSync {
         $all_tables_data = array();
         
         foreach($tables as $key => $value)
-        {
-            $table_data = DB::connection($database->db_name)->select($value);
+        {   
+            try
+            {
+                $table_data = DB::connection($database->db_name)->select($value);
+            }
+            catch(QueryException $ex)
+            {
+                 Storage::put(date('d-m-Y-H_i') . 'log.json', (string)$ex);
+                 continue;
+            }
+            
+
             foreach($table_data as $td)
             {
+                if($key === 'gnote_imports')
+                {
+                    $td->client_id = $database->uuid;
+                    $td->o_id = $database->product_id;
+                    continue;
+                }
                 $td->client_id = $database->uuid;
                 $td->o_id = $td->id;
             }
@@ -53,8 +72,7 @@ class DatabaseSync {
         $data['tables'] = $all_tables_data;
 
         $endpoint = User::find(1)->endpoint;
-        Storage::put('endpoint.txt', var_dump($endpoint));
-        
+       
         $ch = curl_init($endpoint);
 
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
@@ -74,7 +92,7 @@ class DatabaseSync {
             $database->status = 1;
             $database->save();
         } else {
-            Storage::put(date('d-m-Y-H_i') . 'log.json', var_dump($result));
+            Storage::put(date('d-m-Y-H_i') . 'log.json', $result);
         }
         curl_close($ch);
 

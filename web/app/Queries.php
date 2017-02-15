@@ -24,6 +24,7 @@ class Queries {
 			"retailer_info" => "SELECT * FROM retailer_info WHERE last_modified >= NOW() - INTERVAL '$time' HOUR",
 			"subscriber_info" => "SELECT * FROM subscriber_info WHERE last_modified >= NOW() - INTERVAL '$time' HOUR",
 			"user_account" => "SELECT * FROM user_account WHERE last_modified >= NOW() - INTERVAL '$time' HOUR",
+			"gnote_imports" => "SELECT * FROM gnote_imports",
 		);
 	}
 
@@ -46,6 +47,7 @@ class Queries {
 			"retailer_info" => "SELECT * FROM retailer_info",
 			"subscriber_info" => "SELECT * FROM subscriber_info",
 			"user_account" => "SELECT * FROM user_account",
+			"gnote_imports" => "SELECT * FROM gnote_imports",
 		);
 	}
 }
