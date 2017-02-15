@@ -16,7 +16,8 @@ class UserTableSeeder extends Seeder
         DB::table('users')->insert([
             [
             	'uuid' => UUID::v4(),
-	            'username' => 'admin',
+                'username' => 'admin',
+	            'hours' => '24',
                 'password' => bcrypt('admin123'),
             ],
         ]);

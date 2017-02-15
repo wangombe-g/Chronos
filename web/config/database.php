@@ -57,7 +57,7 @@ return [
             'driver' => 'mysql',
             'host' => env('DB_HOST', '127.0.0.1'),
             'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE_LATTANA', 'forge'),
+            'database' => env('DB_DATABASE_ONE', 'forge'),
             'username' => env('DB_USERNAME', 'forge'),
             'password' => env('DB_PASSWORD', ''),
             'charset' => 'utf8mb4',
@@ -70,7 +70,7 @@ return [
             'driver' => 'mysql',
             'host' => env('DB_HOST', '127.0.0.1'),
             'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE_LATTANA_ONE', 'forge'),
+            'database' => env('DB_DATABASE_TWO', 'forge'),
             'username' => env('DB_USERNAME', 'forge'),
             'password' => env('DB_PASSWORD', ''),
             'charset' => 'utf8mb4',
@@ -94,6 +94,16 @@ return [
             'schema' => 'public',
             'sslmode' => 'prefer',
         ],
+
+        'sqlsrv' => [
+           'driver' => 'sqlsrv',
+           'host' => env('SQLSRV_DB_HOST', 'localhost'),
+           'database' => env('SQLSRV_DB_DATABASE', 'forge'),
+           'username' => env('SQLSRV_DB_USERNAME', 'forge'),
+           'password' => env('SQLSRV_DB_PASSWORD', ''),
+           'charset' => 'utf8',
+           'prefix' => '',
+       ],
 
     ],
 

@@ -34,7 +34,7 @@ class SettingsController extends Controller
         // validate input
         $this->validate($request, [
             '_current_password' => 'required',
-            '_current_password' => 'numeric',
+            '_days' => 'numeric',
         ]);
 
         $user = User::where('uuid', Auth::user()->uuid)->firstOrFail();
