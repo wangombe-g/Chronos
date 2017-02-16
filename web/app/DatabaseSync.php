@@ -15,21 +15,22 @@ use Illuminate\Database\QueryException;
 
 class DatabaseSync {
 
-    public static function syncAll() {
+    public static function sync($database) {
         
-        $dbs = Database::all();
         $tables_time = Queries::AllTablesWithTimeConstraint(User::find(1)->time);
         $tables = Queries::AllTables();
 
-        foreach ($dbs as $database) 
+        if($database == null)
         {
-
-            if( $database->last_sync_date == null)
-                DatabaseSync::doJob($tables, $database);
-            else
+            $dbs = Database::all();
+            foreach ($dbs as $database)
                 DatabaseSync::doJob($tables_time, $database);
-            
         }
+        else if( $database->last_sync_date == null)
+            DatabaseSync::doJob($tables, $database);
+        else
+            DatabaseSync::doJob($tables_time, $database);
+
     }
 
     public static function doJob($tables, $database)
