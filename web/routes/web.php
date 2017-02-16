@@ -25,7 +25,7 @@ Route::post('/settings/update/password', 'Settings\SettingsController@updatePass
 Route::get('/dashboard', 'Database\DatabaseController@index')->name('/dashboard');
 Route::get('/database', 'Database\DatabaseController@newDb')->name('/database');
 Route::post('/database/new/', 'Database\DatabaseController@publish')->name('/database/new');
-Route::post('/database/sync/all', 'Database\DatabaseController@syncAll')->name('/database/sync/all');
+Route::post('/database/sync/{database}', 'Database\DatabaseController@sync')->name('/database/sync/');
 Route::get('/database/delete/{database}', 'Database\DatabaseController@delete');
 
 Route::model('database', 'App\Database');

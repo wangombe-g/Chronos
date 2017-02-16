@@ -30,7 +30,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->call(function() {
 
-            DatabaseSync::syncAll();
+            DatabaseSync::sync(null);
            
         })->dailyAt('01:00');
 
