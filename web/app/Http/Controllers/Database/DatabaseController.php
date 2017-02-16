@@ -65,9 +65,9 @@ class DatabaseController extends Controller
         return redirect()->action('Database\DatabaseController@index');
     }
 
-    public function syncAll()
+    public function sync($database)
     {
-        DatabaseSync::syncAll();
+        DatabaseSync::sync($database);
         return redirect()->action('Database\DatabaseController@index');
     }
 }

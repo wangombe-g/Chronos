@@ -9,15 +9,8 @@
                 <div class="panel-body">
                 <!-- navigation tabs -->                
                     <div class="row">
-                        <div class="col-md-10">
+                        <div class="col-md-12">
                             @include('layouts.dashboard.tabs')
-                        </div>
-                        <div class="col-md-2">
-                        <a title="Sync all" class="btn btn-primary" href="{{ url('/database/sync/all') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('sync_all_form').submit();">
-                            <i class="fa fa-refresh" aria-hidden="true"></i>
-                        </a>
                         </div>
                     </div>
                 </div>
@@ -27,7 +20,4 @@
         </div>
     </div>
 </div>
- <form id="sync_all_form" action="{{ url('/database/sync/all') }}" method="POST" style="display: none;">
-    {{ csrf_field() }}
-</form>
 @endsection
