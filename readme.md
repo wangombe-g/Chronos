@@ -1,5 +1,5 @@
 # Cronos
-Open source project for scheduled upload of data from multiple databases
+Open source project for scheduled upload of data from multiple databases. The Application sends data to [CronosReporting](https://github.com/wangombe-g/CronosReporting) which is then saved to a reporting DB in MSSQL. 
 
 # Set up for developer mode
 1. Install WAMP, XAMPP or LAMP
