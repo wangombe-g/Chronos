@@ -19,7 +19,7 @@
                     <a href="{{ url('database/delete/') }}/{{ $database->id }}">
                         <i class="fa fa-trash-o" aria-hidden="true"></i>
                     </a>&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a title="Sync" onclick="event.preventDefault();
+                    <a title="Sync" onclick="event.preventDefault(); showModal();
                     document.getElementById('sync_form-{{ $database->id }}').submit();">
                     <i class="fa fa-refresh" aria-hidden="true"></i>
                 </a>
@@ -36,3 +36,22 @@
     
 </form>
 </div>
+<div class="modal fade" data-backdrop="static" id="loading-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Processing</h4>
+            </div>
+            <div class="modal-body">
+                <div id="loading-div-background">
+                    <div id="loading-div" class="text-center">
+                        <img height="100" src="{{ asset('/img/loading.gif') }}" alt="Loading..."/>
+                        <br>PROCESSING. PLEASE WAIT...
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
