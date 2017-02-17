@@ -51,7 +51,7 @@ class DatabaseSync {
             }
             catch(QueryException $ex)
             {
-                 Storage::put(date('d-m-Y-H_i') . 'log.json', (string)$ex);
+                 Storage::put(date('d-m-Y-H_i') . '-log.json', (string)$ex);
                  continue;
             }
             
@@ -93,7 +93,7 @@ class DatabaseSync {
             $database->status = 1;
             $database->save();
         } else {
-            Storage::put(date('d-m-Y-H_i') . 'log.json', $result);
+            Storage::put(date('d-m-Y-H_i') . '-log.json', $result);
         }
         curl_close($ch);
 
