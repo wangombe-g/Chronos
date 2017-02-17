@@ -91,7 +91,6 @@
     <!-- Scripts -->
     <script src="{{ asset('/js/app.js') }}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
-    <script src="{{ asset('/js/cronos.app.js') }}"></script>
-    
+    <script src="{{ asset('/js/cronos.app.js') }}"></script>   
 </body>
 </html>
