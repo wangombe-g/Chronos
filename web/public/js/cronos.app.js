@@ -1,3 +1,3 @@
-$('#sync_all_button').on('click', function () {
-
-});
+function showModal(){
+    jQuery('#loading-modal').modal('show');
+}
