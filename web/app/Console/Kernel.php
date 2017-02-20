@@ -32,7 +32,7 @@ class Kernel extends ConsoleKernel
 
             DatabaseSync::sync(null);
            
-        })->dailyAt('01:00');
+        })->everyMinute();
 
     }
 
