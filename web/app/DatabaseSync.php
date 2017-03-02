@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\QueryException;
 
+set_time_limit(300);
+
 class DatabaseSync {
 
     public static function sync($database) {
