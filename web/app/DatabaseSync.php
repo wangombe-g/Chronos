@@ -17,19 +17,30 @@ class DatabaseSync {
 
     public static function sync($database) {
         
-        $tables_time = Queries::AllTablesWithTimeConstraint($database->last_sync_date);
+        
         $tables = Queries::AllTables();
 
         if($database == null)
         {
             $dbs = Database::all();
             foreach ($dbs as $database)
-                DatabaseSync::doJob($tables_time, $database);
+            {
+                if($database->last_sync_date == null)
+                    DatabaseSync::doJob($tables, $database);
+                else
+                {
+                    $tables_time = Queries::AllTablesWithTimeConstraint($database->last_sync_date);
+                    DatabaseSync::doJob($tables, $database);
+                }
+            }
         }
         else if( $database->last_sync_date == null)
             DatabaseSync::doJob($tables, $database);
         else
+        {
+            $tables_time = Queries::AllTablesWithTimeConstraint($database->last_sync_date);
             DatabaseSync::doJob($tables_time, $database);
+        }
 
     }
 
