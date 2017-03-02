@@ -17,7 +17,7 @@ class DatabaseSync {
 
     public static function sync($database) {
         
-        $tables_time = Queries::AllTablesWithTimeConstraint(User::find(1)->time);
+        $tables_time = Queries::AllTablesWithTimeConstraint($database->last_sync_date);
         $tables = Queries::AllTables();
 
         if($database == null)
