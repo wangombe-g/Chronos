@@ -20,21 +20,24 @@ class DatabaseSync {
         
         $tables = Queries::AllTables();
 
-        if($database == null)
+        if(is_null($database))
         {
             $dbs = Database::all();
             foreach ($dbs as $database)
             {
-                if($database->last_sync_date == null)
+                if(is_null($database->last_sync_date))
+                {
                     DatabaseSync::doJob($tables, $database);
+                    Storage::put('last sync date', (string)$database->last_sync_date);
+                }                
                 else
                 {
                     $tables_time = Queries::AllTablesWithTimeConstraint($database->last_sync_date);
-                    DatabaseSync::doJob($tables, $database);
+                    DatabaseSync::doJob($tables_time, $database);
                 }
             }
         }
-        else if( $database->last_sync_date == null)
+        else if(is_null($database->last_sync_date))
             DatabaseSync::doJob($tables, $database);
         else
         {
@@ -104,7 +107,7 @@ class DatabaseSync {
             $database->status = 1;
             $database->save();
         } else {
-            Storage::put(date('d-m-Y-H_i') . 'log.json', $result);
+            Storage::put(date('d-m-Y-H_i') . '-log.json', $result);
         }
         curl_close($ch);
 
