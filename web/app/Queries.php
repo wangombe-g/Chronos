@@ -7,7 +7,6 @@ class Queries {
 
 	public static function AllTablesWithTimeConstraint($lastSyncDate)
 	{
-		echo($time);
 		return array(
 			"branch" => "SELECT * FROM branch WHERE last_modified_date >= '$lastSyncDate'",
 			"cart" => "SELECT * FROM cart WHERE last_modified_date >= '$lastSyncDate'",
