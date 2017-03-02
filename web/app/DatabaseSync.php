@@ -67,7 +67,6 @@ class DatabaseSync {
             }
             catch(QueryException $ex)
             {
-                 Storage::put(date('d-m-Y-H_i') . '-log.json', (string)$ex);
                  continue;
             }
             
