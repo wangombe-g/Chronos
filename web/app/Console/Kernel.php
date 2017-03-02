@@ -8,6 +8,8 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use Illuminate\Support\Facades\DB;
 use App\DatabaseSync;
 
+set_time_limit(300);
+
 class Kernel extends ConsoleKernel
 {
     /**
