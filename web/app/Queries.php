@@ -5,28 +5,29 @@ namespace App;
 
 class Queries {	
 
-	public static function AllTablesWithTimeConstraint($time)
+	public static function AllTablesWithTimeConstraint($lastSyncDate)
 	{
-		echo($time);
 		return array(
-			"branch" => "SELECT * FROM branch WHERE last_modified_date >= NOW() - INTERVAL '$time' HOUR",
-			"cart" => "SELECT * FROM cart WHERE last_modified_date >= NOW() - INTERVAL '$time' HOUR",
-			"category" => "SELECT * FROM category WHERE last_modified_date >= NOW() - INTERVAL '$time' HOUR",
-			"changing_info" => "SELECT * FROM charging_info WHERE last_modified_date >= NOW() - INTERVAL '$time' HOUR",
-			"invoiced_products" => "SELECT * FROM invoiced_products WHERE last_modified_date >= NOW() - INTERVAL '$time' HOUR",
-			"invoice" => "SELECT * FROM invoice WHERE last_modified_date >= NOW() - INTERVAL '$time' HOUR",
-			"personal_info" => "SELECT * FROM personal_info WHERE last_modified >= NOW() - INTERVAL '$time' HOUR",
-			"product" => "SELECT * FROM product WHERE last_modified_date >= NOW() - INTERVAL '$time' HOUR",
-			"product_available_branch" => "SELECT * FROM product_available_branch WHERE last_modified_date >= NOW() - INTERVAL '$time' HOUR",
-			"product_category" => "SELECT * FROM product_category WHERE last_modified_date >= NOW() - INTERVAL '$time' HOUR",
-			"product_image" => "SELECT * FROM product_image WHERE last_modified_date >= NOW() - INTERVAL '$time' HOUR",
-			"retailer_branches" => "SELECT * FROM retailer_branches WHERE last_modified_date >= NOW() - INTERVAL '$time' HOUR",
-			"retailer_info" => "SELECT * FROM retailer_info WHERE last_modified >= NOW() - INTERVAL '$time' HOUR",
-			"subscriber_info" => "SELECT * FROM subscriber_info WHERE last_modified >= NOW() - INTERVAL '$time' HOUR",
-			"user_account" => "SELECT * FROM user_account WHERE last_modified >= NOW() - INTERVAL '$time' HOUR",
-			"gnote_imports" => "SELECT * FROM gnote_imports",
+			"branch" => "SELECT * FROM branch WHERE last_modified_date >= '$lastSyncDate'",
+			"cart" => "SELECT * FROM cart WHERE last_modified_date >= '$lastSyncDate'",
+			"category" => "SELECT * FROM category WHERE last_modified_date >= '$lastSyncDate'",
+			"changing_info" => "SELECT * FROM charging_info WHERE last_modified_date >= '$lastSyncDate'",
+			"invoiced_products" => "SELECT * FROM invoiced_products WHERE last_modified_date >= '$lastSyncDate'",
+			"invoice" => "SELECT * FROM invoice WHERE last_modified_date >= '$lastSyncDate'",
+			"personal_info" => "SELECT * FROM personal_info WHERE last_modified >= '$lastSyncDate'",
+			"product" => "SELECT * FROM product WHERE last_modified_date >= '$lastSyncDate'",
+			"product_available_branch" => "SELECT * FROM product_available_branch WHERE last_modified_date >= '$lastSyncDate'",
+			"product_category" => "SELECT * FROM product_category WHERE last_modified_date >= '$lastSyncDate'",
+			"product_image" => "SELECT * FROM product_image WHERE last_modified_date >= '$lastSyncDate'",
+			"retailer_branches" => "SELECT * FROM retailer_branches WHERE last_modified_date >= '$lastSyncDate'",
+			"retailer_info" => "SELECT * FROM retailer_info WHERE last_modified >= '$lastSyncDate'",
+			"subscriber_info" => "SELECT * FROM subscriber_info WHERE last_modified >= '$lastSyncDate'",
+			"user_account" => "SELECT * FROM user_account WHERE last_modified >= '$lastSyncDate'",
+			"gnote_imports" => "SELECT * FROM gnote_imports WHERE created >= '$lastSyncDate'",
 		);
 	}
+
+	
 
 	public static function AllTables()
 	{

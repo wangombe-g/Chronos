@@ -31,16 +31,6 @@
         @endif
     </div>
 
-    <label for="_email">Hours to Sync</label>
-    <div class="form-group">
-        <input type="number" min="24" name="_hours" class="form-control" value="{{ $user ? $user->hours : old('_hours') }}">
-        @if ($errors->has('_hours'))
-            <span class="help-block">
-                <strong>{{ $errors->first('_hours') }}</strong>
-            </span>
-        @endif
-    </div>
-
     <hr>
     <label>Change Password</label>
     <div class="row">            

@@ -1,3 +1,3 @@
-cd C:\xampp\htdocs\chronos.com\web\
+cd C:\xampp\htdocs\cronos\web\
 
-php artisan schedule:run
+php artisan schedule:run -v

@@ -18,7 +18,7 @@ class CreateDatabasesTable extends Migration
             $table->string('db_name')->unique();
             $table->dateTime('last_sync_date')->nullable();
             $table->enum('status', ['1', '0'])->nullable();
-            $table->timestampsTz();
+            $table->timestamps();
         });
     }
 
