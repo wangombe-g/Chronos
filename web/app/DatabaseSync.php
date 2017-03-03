@@ -99,6 +99,7 @@ class DatabaseSync {
         );                                                               
 
         $result = curl_exec($ch);
+        $info = curl_getinfo($ch);
 
         if (!curl_errno($ch))
         {
@@ -107,7 +108,10 @@ class DatabaseSync {
             $database->status = 1;
             $database->save();
         } else {
-            Storage::put(date('d-m-Y-H_i') . '-log.json', $result);
+            Storage::put(date('d-m-Y-H_i') . '-log.json', 
+                'Took '. $info['total_time']. ' seconds to send a request to '. $info['url']. "\n",
+                'System returned ' . $info['http_code'] . '\n'.
+                $result);
         }
         curl_close($ch);
 
