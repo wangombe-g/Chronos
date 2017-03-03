@@ -14,7 +14,7 @@
             <tr>
                 <td>{{ $database->db_name }}</td>
                 <td>{{ $database->last_sync_date }}</td>
-                <td>{!! $database->status == 1 ? '<i class="fa fa-check-circle-o" aria-hidden="true" title="Sync Succeeded"></i>' : '<i class="fa fa-ban" aria-hidden="true" title="Sync Failed"></i>' !!}</td>
+                <td>{!! !is_null($database->last_sync_date) ? '<i class="fa fa-check-circle-o" aria-hidden="true" title="Sync Succeeded"></i>' : '<i class="fa fa-ban" aria-hidden="true" title="Not Synced"></i>' !!}</td>
                 <td>
                     <a href="{{ url('database/delete/') }}/{{ $database->id }}">
                         <i class="fa fa-trash-o" aria-hidden="true"></i>
