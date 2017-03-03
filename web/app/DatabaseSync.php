@@ -30,7 +30,6 @@ class DatabaseSync {
                 if(is_null($database->last_sync_date))
                 {
                     DatabaseSync::doJob($tables, $database);
-                    Storage::put('last sync date', (string)$database->last_sync_date);
                 }                
                 else
                 {
