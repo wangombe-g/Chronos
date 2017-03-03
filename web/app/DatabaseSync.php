@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\QueryException;
 
-set_time_limit(300);
+set_time_limit(360);
 
 class DatabaseSync {
 
