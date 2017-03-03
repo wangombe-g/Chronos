@@ -103,7 +103,7 @@ class DatabaseSync {
 
         if (!curl_errno($ch))
         {
-            Storage::put(date('d-m-Y-H_i') . '.json', json_encode($data));
+            //Storage::put(date('d-m-Y-H_i') . '.json', json_encode($data));
             $database->last_sync_date = date('Y-m-d H:i:s');
             $database->status = 1;
             $database->save();
