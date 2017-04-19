@@ -57,12 +57,32 @@ class DatabaseSync {
         $data['sync_date'] = date('Y-m-d H:i:s');
 
         $all_tables_data = array();
+
+        /*
+        This block is to be used only for the Governor(Notifyr)
+        */
+        if($database->db_name === 'ci_agrisms_governor' && is_null($database->last_sync_date))
+            $tables = Queries::GovernorTables();
+        else if($database->db_name === 'ci_agrisms_governor')
+            $tables = Queries::GovernorTablesWithTimeConstraint($database->last_sync_date);
         
         foreach($tables as $key => $value)
         {   
             try
             {
                 $table_data = DB::connection($database->db_name)->select($value);
+                foreach($table_data as $td)
+                {
+                    if($key === 'gnote_imports')
+                    {
+                        $td->client_id = $database->uuid;
+                        $td->o_id = $td->product_id;
+                        continue;
+                    }
+                    $td->client_id = $database->uuid;
+                    $td->o_id = $td->id;
+                }
+
             }
             catch(QueryException $ex)
             {
@@ -70,18 +90,7 @@ class DatabaseSync {
             }
             
 
-            foreach($table_data as $td)
-            {
-                if($key === 'gnote_imports')
-                {
-                    $td->client_id = $database->uuid;
-                    $td->o_id = $database->product_id;
-                    continue;
-                }
-                $td->client_id = $database->uuid;
-                $td->o_id = $td->id;
-            }
-
+            
             $all_tables_data[$key] = $table_data;
         }
         $data['tables'] = $all_tables_data;

@@ -51,4 +51,17 @@ class Queries {
 			"gnote_imports" => "SELECT * FROM gnote_imports",
 		);
 	}
+
+	public static function GovernorTablesWithTimeConstriant($lastSyncDate)
+	{
+		return array(
+			"sms_received" => "SELECT * FROM sms_received WHERE created >= '$lastSyncDate'",
+		);
+	}
+	public static function GovernorTables()
+	{
+		return array(
+			"sms_received" => "SELECT * FROM sms_received",
+		);
+	}
 }
