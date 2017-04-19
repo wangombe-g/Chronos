@@ -8,3 +8,4 @@ Homestead.yaml
 .env
 *.bat
 *.sh
+web/.env.sublime-workspace

@@ -87,8 +87,7 @@ class DatabaseSync {
             catch(QueryException $ex)
             {
                  continue;
-            }
-            
+            }      
 
             
             $all_tables_data[$key] = $table_data;
@@ -112,15 +111,19 @@ class DatabaseSync {
 
         if (!curl_errno($ch))
         {
-            //Storage::put(date('d-m-Y-H_i') . '.json', json_encode($data));
-            $database->last_sync_date = date('Y-m-d H:i:s');
-            $database->status = 1;
-            $database->save();
-        } else {
-            Storage::put(date('d-m-Y-H_i') . '-log.json', 
-                'Took '. $info['total_time']. ' seconds to send a request to '. $info['url']. "\n",
+            switch ($http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE)) {
+                case 200:  # OK
+                    //Storage::put(date('d-m-Y-H_i') . '.json', json_encode($data));
+                    $database->last_sync_date = date('Y-m-d H:i:s');
+                    $database->status = 1;
+                    $database->save();
+                break;
+                default:
+                Storage::put(date('d-m-Y-H_i') . '-log.json', 
+                'Took '. $info['total_time']. ' seconds to send a request to '. $info['url']. "\n,".
                 'System returned ' . $info['http_code'] . '\n'.
                 $result);
+            }
         }
         curl_close($ch);
 

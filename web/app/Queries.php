@@ -52,7 +52,7 @@ class Queries {
 		);
 	}
 
-	public static function GovernorTablesWithTimeConstriant($lastSyncDate)
+	public static function GovernorTablesWithTimeConstraint($lastSyncDate)
 	{
 		return array(
 			"sms_received" => "SELECT * FROM sms_received WHERE created >= '$lastSyncDate'",
