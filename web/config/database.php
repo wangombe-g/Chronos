@@ -92,7 +92,6 @@ return [
             'strict' => true,
             'engine' => null,
         ],
-        ],
         env('DB_DATABASE_FOUR', 'forge') => [
             'driver' => 'mysql',
             'host' => env('DB_HOST', '127.0.0.1'),
@@ -145,9 +144,7 @@ return [
             'strict' => true,
             'engine' => null,
         ],
-
-
-
+        
         'pgsql' => [
             'driver' => 'pgsql',
             'host' => env('DB_HOST', '127.0.0.1'),

@@ -57,14 +57,6 @@ class DatabaseSync {
         $data['sync_date'] = date('Y-m-d H:i:s');
 
         $all_tables_data = array();
-
-        /*
-        This block is to be used only for the Governor(Notifyr)
-        */
-        if($database->db_name === 'ci_agrisms_governor' && is_null($database->last_sync_date))
-            $tables = Queries::GovernorTables();
-        else if($database->db_name === 'ci_agrisms_governor')
-            $tables = Queries::GovernorTablesWithTimeConstraint($database->last_sync_date);
         
         foreach($tables as $key => $value)
         {   
@@ -73,13 +65,11 @@ class DatabaseSync {
                 $table_data = DB::connection($database->db_name)->select($value);
                 foreach($table_data as $td)
                 {
-                    if($key === 'gnote_imports')
-                    {
-                        $td->client_id = $database->uuid;
-                        $td->o_id = $td->product_id;
+                    $td->client_id = $database->uuid;
+                    if($key === 'jpollingstation'){
                         continue;
                     }
-                    $td->client_id = $database->uuid;
+                        
                     $td->o_id = $td->id;
                 }
 
@@ -92,7 +82,7 @@ class DatabaseSync {
             
             $all_tables_data[$key] = $table_data;
         }
-        $data['tables'] = $all_tables_data;
+        $data['tables'] = $all_tables_data;        
 
         $endpoint = User::find(1)->endpoint;
        
@@ -113,7 +103,7 @@ class DatabaseSync {
         {
             switch ($http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE)) {
                 case 200:  # OK
-                    //Storage::put(date('d-m-Y-H_i') . '.json', json_encode($data));
+                    Storage::put(date('d-m-Y-H_i') . '.json', json_encode($data));
                     $database->last_sync_date = date('Y-m-d H:i:s');
                     $database->status = 1;
                     $database->save();
