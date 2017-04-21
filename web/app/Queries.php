@@ -9,9 +9,9 @@ class Queries {
 	{
 		
 		return array(
-			"sms_received" => "SELECT * FROM sms_received",
-      		"groups" => "SELECT * FROM groups",
-      		"jpollingstation" => "SELECT * FROM jpollingstation",
+			"sms_received" => "SELECT * FROM sms_received last_modified_date >= '2017-04-20 23:59:59'",
+      		//"groups" => "SELECT * FROM groups",
+      		//"jpollingstation" => "SELECT * FROM jpollingstation",
 		);
 	}
 

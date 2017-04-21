@@ -47,11 +47,13 @@ class DatabaseController extends Controller
     	// validate input
         $this->validate($request, [
             '_name' => 'required',
+            '_asp' => 'required|max:2',
         ]);
 
        	$db = new Database();
         $db->uuid = UUID::v4();
        	$db->db_name = $request['_name'];
+       	$db->asp = $request['_asp'];
 		$db->save();        
 
         return redirect()->action('Database\DatabaseController@index');

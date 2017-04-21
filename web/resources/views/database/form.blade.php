@@ -24,6 +24,15 @@
                             </span>
                             @endif
                         </div>
+                        <label for="_asp">Aspirant type</label>
+                        <div class="form-group">
+                            <input type="text" name="_asp" class="form-control" required>
+                            @if ($errors->has('_asp'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('_asp') }}</strong>
+                            </span>
+                            @endif
+                        </div>
                         <input type="submit" class="btn btn-primary" value="Save">
                     </form>
                 </div>

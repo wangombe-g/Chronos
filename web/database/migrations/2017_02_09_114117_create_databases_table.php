@@ -16,6 +16,7 @@ class CreateDatabasesTable extends Migration
             $table->increments('id');
             $table->uuid('uuid')->unique();
             $table->string('db_name')->unique();
+            $table->string('asp')->unique();
             $table->dateTime('last_sync_date')->nullable();
             $table->enum('status', ['1', '0'])->nullable();
             $table->timestamps();

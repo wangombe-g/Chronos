@@ -71,6 +71,8 @@ class DatabaseSync {
                     }
                         
                     $td->o_id = $td->id;
+                    if($key === 'sms_received')
+                        $td->asp = $database->asp;
                 }
 
             }
