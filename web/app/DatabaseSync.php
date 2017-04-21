@@ -55,6 +55,7 @@ class DatabaseSync {
         $data['client_id'] = $database->uuid; 
         $data['last_sync_date'] = $database->last_sync_date;
         $data['sync_date'] = date('Y-m-d H:i:s');
+        $data['aspitant'] = $database->asp;
 
         $all_tables_data = array();
         
@@ -65,14 +66,15 @@ class DatabaseSync {
                 $table_data = DB::connection($database->db_name)->select($value);
                 foreach($table_data as $td)
                 {
-                    $td->client_id = $database->uuid;
-                    if($key === 'jpollingstation'){
-                        continue;
-                    }
-                        
-                    $td->o_id = $td->id;
-                    if($key === 'sms_received')
-                        $td->asp = $database->asp;
+                    
+                        $td->client_id = $database->uuid;
+                        if($key === 'jpollingstation'){
+                            continue;
+                        }
+                            
+                        $td->o_id = $td->id;
+                        if($key === 'sms_received')
+                            $td->aspirant = $database->asp;
                 }
 
             }
@@ -85,7 +87,7 @@ class DatabaseSync {
             $all_tables_data[$key] = $table_data;
         }
         $data['tables'] = $all_tables_data;        
-
+//Storage::put(date('d-m-Y-H_i') . '.json', json_encode($data));
         $endpoint = User::find(1)->endpoint;
        
         $ch = curl_init($endpoint);
@@ -105,7 +107,7 @@ class DatabaseSync {
         {
             switch ($http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE)) {
                 case 200:  # OK
-                    Storage::put(date('d-m-Y-H_i') . '.json', json_encode($data));
+                    
                     $database->last_sync_date = date('Y-m-d H:i:s');
                     $database->status = 1;
                     $database->save();
