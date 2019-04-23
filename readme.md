@@ -74,7 +74,7 @@ This is easier than connecting to the dbs at runntime.
 # Caveat
 - This project could be better, really. It was done in a hurry to cater for a very specific need
 
-*Have questions? reach me at eugene@ucourseware.org
+*Have questions? reach me at eugene@pyrazoe.com
 
 # License
 
